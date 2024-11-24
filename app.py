@@ -25,14 +25,11 @@ class EnhancedBookReader(BoxLayout):
         
         # Create buttons
         self.open_button = Button(text='Open Book')
-        self.font_size_button = Button(text='Font Size')
         
         self.open_button.bind(on_press=self.show_file_chooser)
-        self.font_size_button.bind(on_press=self.show_font_settings)
         
         # Add buttons to toolbar
         self.toolbar.add_widget(self.open_button)
-        self.toolbar.add_widget(self.font_size_button)
         
         # Create scroll view for text content
         self.scroll_view = ScrollView()
@@ -70,30 +67,6 @@ class EnhancedBookReader(BoxLayout):
             title='Select Book',
             content=content,
             size_hint=(0.9, 0.9)
-        )
-        popup.open()
-        
-    def show_font_settings(self, instance):
-        content = BoxLayout(orientation='vertical')
-        
-        slider = Slider(
-            min=10,
-            max=30,
-            value=14,
-            step=1
-        )
-        
-        def change_font_size(instance, value):
-            self.text_content.font_size = f'{value}sp'
-            
-        slider.bind(value=change_font_size)
-        content.add_widget(Label(text='Adjust Font Size'))
-        content.add_widget(slider)
-        
-        popup = Popup(
-            title='Font Settings',
-            content=content,
-            size_hint=(0.8, 0.4)
         )
         popup.open()
 
